@@ -3,10 +3,11 @@ CC					=	cc
 INC					=	inc/
 CFLAGS				=	-Wall -Werror -Wextra -I $(INC)
 SRCS				=	$(addprefix $(SRCS_DIR), $(SRCS_FILES))
-SRCS_FILES			=	ft_printf.c
+SRCS_FILES			=	ft_printf.c libft_utils.c ft_printf_utils.c \
+						conv_funct.c
 SRCS_DIR			=	srcs/
 OBJS				=	$(addprefix $(OBJS_DIR), $(OBJS_FILES))
-OBJS_FILES			=	$(SRCS:%.c=%.o)
+OBJS_FILES			=	$(SRCS_FILES:%.c=%.o)
 OBJS_DIR			=	objs/
 
 all:	$(NAME)
