@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 20:42:16 by telufulu          #+#    #+#             */
-/*   Updated: 2023/09/28 02:14:44 by telufulu         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:14:28 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,19 @@ size_t	conv_string(va_list arg)
 size_t	conv_addrss(va_list arg)
 {
 	size_t				i;
+	size_t				x;
 	unsigned long int	p;
 
 	i = 0;
 	//p = va_arg(arg, unsigned long long);
 	p = va_arg(arg, unsigned long long);
-	i += write(1, "0x", 2);
-	i += ft_putptr(p, "0123456789abcdef");
-	return (i);
+	i = write(1, "0x", 2);
+	if (i < 0)
+		return (i);
+	x = ft_putptr(p, "0123456789abcdef");
+	if (x < 0)
+		return (x);
+	return (i + x);
 }
 
 size_t	conv_dec(va_list arg)

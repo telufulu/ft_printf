@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:48:56 by telufulu          #+#    #+#             */
-/*   Updated: 2023/09/28 02:37:02 by telufulu         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:53:16 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	ft_printf(char const *s, ...)
 			s++;
 			if (*s == '%')
 				nb_chars += write(1, "%", 1);
+			if (nb_chars < 0)
+				return (nb_chars);
 			while (i < NB_OF_CONV && store[i].conv != *s)
 				i++;
 			if (i < NB_OF_CONV)
@@ -53,6 +55,8 @@ int	ft_printf(char const *s, ...)
 		}
 		else
 			nb_chars += write(1, s++, 1);
+		if (nb_chars < 0)
+			return (nb_chars);
 	}
 	va_end(arg);	
 	return (nb_chars);
