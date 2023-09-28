@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:48:56 by telufulu          #+#    #+#             */
-/*   Updated: 2023/09/27 21:06:16 by telufulu         ###   ########.fr       */
+/*   Updated: 2023/09/28 02:37:02 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,21 @@ static void	init_store(t_store *store)
 	store[2] = (t_store){'p', &conv_addrss};
 	store[3] = (t_store){'d', &conv_dec};
 	store[4] = (t_store){'i', &conv_dec};
-	store[5] = (t_store){'x', &conv_hex};
-	store[6] = (t_store){'X', &conv_heX};
+	store[5] = (t_store){'u', &conv_unsig};
+	store[6] = (t_store){'x', &conv_hex};
+	store[7] = (t_store){'X', &conv_heX};
 }
 
 int	ft_printf(char const *s, ...)
 {
 	va_list	arg;
 	size_t	nb_chars;
-	t_store	*store;
+	t_store	store[NB_OF_CONV + 1];
 	int		i;
 
 	nb_chars = 0;
 	va_start(arg, s);
-	store = ft_calloc(sizeof(t_store), NB_OF_CONV + 1);
-	if (!store)
-		return (-1);
+	ft_bzero(store, NB_OF_CONV);
 	init_store(store);
 	while (s && *s)
 	{
@@ -48,6 +47,8 @@ int	ft_printf(char const *s, ...)
 				i++;
 			if (i < NB_OF_CONV)
 				nb_chars += store[i].funct(arg);
+			if (i > NB_OF_CONV)
+				nb_chars += write(1, s, 1);
 			s++;
 		}
 		else

@@ -6,11 +6,11 @@
 /*   By: telufulu <telufulu@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 19:40:14 by telufulu          #+#    #+#             */
-/*   Updated: 2023/09/27 21:06:10 by telufulu         ###   ########.fr       */
+/*   Updated: 2023/09/28 02:33:35 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../inc/ft_printf.h"
 #include <stdio.h>
 #include <limits.h>
 
@@ -33,7 +33,10 @@ int	main(int argc, char **argv)
 	//char			c = 42;
 	
 	//p examples
-
+	//char	*p = -1;
+	//char	*p = 15;
+	//char	*p = ULONG_MAX;
+	//char	*p = -ULONG_MAX;
 
 	//d, i, x, X examples
 	//int	d = INT_MAX;
@@ -46,6 +49,15 @@ int	main(int argc, char **argv)
 	int	d = -2048;
 	
 
+	// error
+	if (*argv[argc - 1] == 'e')
+	{
+		printf("\n********** error **********\n");
+		res = printf("org: \001\002\007\v\010\f\r\n");
+		printf("(%i)\n", res);
+		res = ft_printf("cpy: \001\002\007\v\010\f\r\n");
+		printf("(%i)\n", res);
+	}
 	// no_arg
 	if (*argv[argc - 1] == 'n')
 	{
@@ -77,9 +89,9 @@ int	main(int argc, char **argv)
 	else if (*argv[argc - 1] == 'p')
 	{
 		printf("\n********** p **********\n");
-		res = printf("org: %p", &c);
+		res = printf("org: %p", s1);
 		printf("(%i)\n", res);
-		res = ft_printf("cpy: %p", &c);
+		res = ft_printf("cpy: %p", s1);
 		printf("(%i)\n", res);
 	}
 	// d
@@ -98,6 +110,15 @@ int	main(int argc, char **argv)
 		res = printf("org: %i", d);
 		printf("(%i)\n", res);
 		res = ft_printf("cpy: %i", d);
+		printf("(%i)\n", res);
+	}
+	// u
+	else if (*argv[argc - 1] == 'u')
+	{
+		printf("\n********** u **********\n");
+		res = printf("org: %u", d);
+		printf("(%i)\n", res);
+		res = ft_printf("cpy: %u", d);
 		printf("(%i)\n", res);
 	}
 	// x

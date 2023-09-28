@@ -1,15 +1,14 @@
-NAME				=	ft_printf.a
+NAME				=	libftprintf.a
 CC					=	cc
-INC					=	ft_printf.h
+INC					=	inc/
 CFLAGS				=	-Wall -Werror -Wextra -I $(INC)
-#SRCS				=	$(addprefix $(SRCS_DIR), $(SRCS_FILES))
-#SRCS_FILES			=	ft_printf.c libft_utils.c ft_printf_utils.c \
-						conv_funct.c
-#SRCS_DIR			=	srcs/
-SRCS				=	ft_printf.c libft_utils.c conv_funct.c
+SRCS				=	$(addprefix $(SRCS_DIR), $(SRCS_FILES))
+SRCS_FILES			=	ft_printf.c libft_utils.c conv_funct.c
+SRCS_DIR			=	srcs/
+#SRCS				=	ft_printf.c libft_utils.c conv_funct.c
 OBJS				=	$(addprefix $(OBJS_DIR), $(OBJS_FILES))
-#OBJS_FILES			=	$(SRCS_FILES:%.c=%.o)
-OBJS_FILES			=	$(SRCS:%.c=%.o)
+OBJS_FILES			=	$(SRCS_FILES:%.c=%.o)
+#OBJS_FILES			=	$(SRCS:%.c=%.o)
 OBJS_DIR			=	objs/
 
 all:	$(NAME)
@@ -17,8 +16,8 @@ all:	$(NAME)
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
-#$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
-$(OBJS_DIR)%.o: %.c
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
+#$(OBJS_DIR)%.o: %.c
 	[ -d $(OBJS_DIR) ] | mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
